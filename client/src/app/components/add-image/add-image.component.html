@@ -1,0 +1,21 @@
+<div style="border: black 5px solid" class="round m-3 p-3">
+    <app-choose-image [selectedImage]="imgDetails.file" (onSelectImage)="imageSelected($event)"></app-choose-image>
+    <div *ngIf="imgDetails.file!=undefined">
+        <h3 *ngIf="imgDetails.savedSuccessfully">התווסף בהצלחה <mat-icon>check_circle</mat-icon></h3>
+        <p>מספר תמונה: {{imgDetails.imageIndex}}</p>
+        <label for="">:נתיב שמירת התמונה</label>
+        <p>{{imgDetails.path}}</p>
+        <div>
+            <input type="checkbox" class="m-1" [id]="imgDetails.path" [(ngModel)]="imgDetails.hasBack">
+            <label [for]="imgDetails.path" class="m-1">גב תמונה</label>
+        </div>
+        <app-choose-image *ngIf="imgDetails.hasBack" [selectedImage]="imgDetails.backFile"
+            (onSelectImage)="backImageSelected($event)"></app-choose-image>
+        <div *ngIf="imgDetails.backFile!=undefined">
+            <label for="">:נתיב שמירת גב התמונה</label>
+            <p>{{imgDetails.backPath}}</p>
+        </div>
+        <br>
+        <button *ngIf="isLast" class="btn btn-primary" (click)="remove.emit()">מחק</button>
+    </div>
+</div>
